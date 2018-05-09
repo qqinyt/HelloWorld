@@ -1,0 +1,12 @@
+@echo off
+rem 署名書をインストールする
+certutil -addstore -f -enterprise root "%~dp0xx.cer"
+certutil -addstore -f -enterprise TrustedPublisher "%~dp0xx.cer"
+
+rem 信頼されるアプリブラウザ内で実行を許可する
+@reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
+
+if %OS%==32BIT @reg add HKEY_LOCAL_MACHINE\Software\Microsoft\Silverlight\ /v AllowElevatedTrustAppsInBrowser /t REG_DWORD /d 1 /f>nul
+if %OS%==64BIT @reg add HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Silverlight\ /v AllowElevatedTrustAppsInBrowser /t REG_DWORD /d 1 /f>nul
+
+PAUSE

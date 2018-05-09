@@ -1,6 +1,6 @@
 @echo off
 makecert.exe -r -n "CN=qqinyt" -a sha512 -b 05/09/2018 -e 12/31/2028 -sv "%~dp0xx.pvk" "%~dp0xx.cer"
-cert2spc.exe "%~dp0Mtack.Housas.SL.cer" "%~dp0xx.spc"
-pvk2pfx -pfx "%~dp0Mtack.Housas.SL.pfx" -spc "%~dp0xx.spc" -pvk "%~dp0xx.pvk"
+cert2spc.exe "%~dp0xx.cer" "%~dp0xx.spc"
+pvk2pfx -pfx "%~dp0xx.pfx" -spc "%~dp0xx.spc" -pvk "%~dp0xx.pvk"
 
 PAUSE
